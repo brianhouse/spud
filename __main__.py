@@ -39,7 +39,7 @@ def process_images():
     # print(json.dumps(images, indent=4))
     return images
 
-def build(structure, root):
+def build(structure, root, info=None):
     if structure is None:
         return False, None
     else:
@@ -99,7 +99,7 @@ def build(structure, root):
                     page_images.append((image, width, height, hires))
             data.update({'images': page_images})
             if type(structure) is dict:
-                update, child_data = build(structure[page], path)
+                update, child_data = build(structure[page], path, info)
                 if child_data:
                     data['child_data'] = child_data
             if os.path.isfile(template) and os.path.isfile(content) and (not os.path.isfile(html_path) or (os.path.getmtime(template) > os.path.getmtime(html_path)) or (os.path.getmtime(content) > os.path.getmtime(html_path))):
@@ -114,7 +114,7 @@ def build(structure, root):
             if update:
                 if build_page:
                     print(f"\t--> updating")
-                    html = render(template, data, image_structure=images, structure=(structure[page] if type(structure) is dict else None))
+                    html = render(template, data, image_structure=images, structure=(structure[page] if type(structure) is dict else None), info=info)
                     with open(html_path, 'w') as f:
                         f.write(html)
                 update_parent = True
@@ -170,7 +170,7 @@ def copy_static(root):
             shutil.copy(os.path.join("spud", "static", "js", filename), f"{root}/")
     for filename in os.listdir("icons"):
         if filename[0] != "." and not os.path.isdir(os.path.join("static", filename)):
-            shutil.copy(os.path.join("icons", filename), f"{root}/")    
+            shutil.copy(os.path.join("icons", filename), f"{root}/")
     shutil.copy("style.css", f"{root}/")
 
 if __name__ == "__main__":
@@ -179,6 +179,8 @@ if __name__ == "__main__":
         exit()
     with open("structure.yaml") as f:
         structure = yaml.safe_load(f)
+    with open("info.yaml") as f:
+        info = yaml.safe_load(f)
     root = list(structure.keys())[0]
     if sys.argv[1] == "test":
         try:
@@ -195,5 +197,5 @@ if __name__ == "__main__":
         print("[generate|rebuild|test]")
         exit()
     images = process_images()
-    build(structure, ".")
+    build(structure, ".", info)
     copy_static(root)
