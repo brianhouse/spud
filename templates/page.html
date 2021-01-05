@@ -37,9 +37,9 @@
 <div id="header">
     <div id="name"><a href="/" alt="Home">{{ info.name }}</a></div>
     <div id="menu">
-        <a href="/{{ info.menu[0][1].strip('/') }}{{ '/' if info.menu[0][1] | length }}" alt="{{ info.menu[0][0] }}">{{ info.menu[0][0] }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="/{{ info.menu[1][1].strip('/') }}{{ '/' if info.menu[0][1] | length }}" alt="{{ info.menu[1][0] }}">{{ info.menu[1][0] }}</a>&nbsp;&nbsp;&nbsp;&nbsp;
-        <a href="/{{ info.menu[2][1].strip('/') }}{{ '/' if info.menu[0][1] | length }}" alt="{{ info.menu[2][0] }}">{{ info.menu[2][0] }}</a>
+        {% for item in info.menu %}
+        <a href="/{{ item[1].strip('/') }}{% if item[1] | length > 0 %}/{% endif %}" alt="{{ item[0] }}">{{ item[0] }}</a>{% if not loop.last %}&nbsp;&nbsp;&nbsp;&nbsp;{% endif %}
+        {% endfor %}
     </div>
 </div>
 <div class="clear"></div>
