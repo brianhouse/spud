@@ -1,0 +1,72 @@
+{% extends "spud/templates/page.html" %}
+
+{% block head %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://brianhouse.net/infinitescrolling.js"></script>
+{% endblock head %}
+
+
+{% block content %}
+<div id="posts" class="autopagerize_page_element">
+    {block:Posts}
+
+        {block:Photo}
+            <div class="post">
+                <div class="portrait">
+                    <img src="{PhotoURL-HighRes}" />
+                </div>
+                <div class="about">
+                    <div class="text">{Caption}</div>
+                    <span class="credits">
+                        {Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}<br />
+                        {block:Tags}
+                            <a class="tag" href="{TagURL}">#{Tag}</a>
+                        {/block:Tags}
+                    </span>
+                </div>
+                <div class="clear"></div>
+            </div>
+        {/block:Photo}
+
+        {block:Video}
+            <div class="post">
+                <div class="portrait">
+                    <img src="https://brianhouse.net/video.png" alt="video" />
+                </div>
+                <div class="about">
+                    {VideoEmbed-700}<br />
+                    <br />
+                    <div class="text">{Caption}</div>
+                    <span class="credits">
+                        {Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}<br />
+                        {block:Tags}
+                            <a class="tag" href="{TagURL}">#{Tag}</a>
+                        {/block:Tags}
+                    </span>
+                </div>
+                <div class="clear"></div>
+            </div>
+        {/block:Video}
+
+        {block:Audio}
+            <div class="post">
+                <div class="portrait">
+                    {AudioEmbed-250}
+                </div>
+                <div class="about">
+                    <div class="text">{Caption}</div>
+                    <span class="credits">
+                        {Year}-{MonthNumberWithZero}-{DayOfMonthWithZero}<br />
+                        {block:Tags}
+                            <a class="tag" href="{TagURL}">#{Tag}</a>
+                        {/block:Tags}
+                    </span>
+                </div>
+                <div class="clear"></div>
+            </div>
+        {/block:Audio}
+
+    {/block:Posts}
+</div>
+
+{% endblock content %}

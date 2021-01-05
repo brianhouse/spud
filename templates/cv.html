@@ -1,0 +1,269 @@
+{% extends "spud/templates/page.html" %}
+
+{% block title %}<title>Brian House | CV</title>{% endblock title %}
+
+{% block content %}
+
+<div>
+    {% block cv %}
+    <span class="title">
+        Curriculum vitae<br />
+    </span>
+    {% endblock cv %}
+</div>
+
+<div>
+    Portfolio
+    <hr />
+    <ul>
+        <li>https://brianhouse.net</li>
+    </ul>
+</div>
+
+<div>
+    Education
+    <hr />
+    <ul>
+        {% for item in education %}
+        <li><span class="show">{{ item.year }}</span> {{ item.degree }}, <b>{{ item.institution }}</b>, {{ item.city }}{% if item.country %}, {{ item.country }}{% endif %}{% if item.addendum %}<br />{{ item.addendum }}{% endif %}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Academic Positions
+    <hr />
+    <ul>
+        <li><span class="show">2019-</span><span style="color: white;">00-</span> Assistant Professor of Art and Studio Head of Digital Media, <b>Lewis &amp; Clark College</b>, Portland</li>
+        <li><span class="show">2018-2019</span> Mellon Associate Research Scholar, <b>Columbia University GSAPP</b>, New York</li>
+        <li><span class="show">2012-2015</span> Critic, <b>Rhode Island School of Design</b>, Providence</li>
+    </ul>
+</div>
+
+<div>
+    Selected Non-Academic Positions
+    <hr />
+    <ul>
+        <li><span class="show">2013-2015</span> Technologist + Sound Recordist, <b>National Geographic Okavango Wilderness Project</b>, Botswana</li>
+        <li><span class="show">2010-2012</span> Creative Technologist, <b>The New York Times Research &amp; Development Lab</b>, New York</li>
+        <li><span class="show">2008-2010</span> Director of Technology, <b>Local Projects</b>, New York</li>
+    </ul>
+</div>
+
+<div>
+    Solo and Duo Exhibitions
+    <hr />
+    <ul>
+        {% for year in exhibitions.solo %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li>
+                    <span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.title %}<i>{{ item.title }}</i>, {% endif %}<b>{{ item.venue }}</b>, {{ item.city }}{% if item.country %}, {{ item.country }}{% endif %}
+                </li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Group Exhibitions
+    <hr />
+    <ul>
+        {% for year in exhibitions.group %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li>
+                    <span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.title %}<i>{{ item.title }}</i>, {% endif %}<b>{{ item.venue }}</b>, {{ item.city }}{% if item.country %}, {{ item.country }}{% endif %}
+                </li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Awards
+    <hr />
+    <ul>
+        {% for year in awards %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li>
+                    <span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {{ item.kind }}, <b>{{ item.venue }}</b>, {{ item.location }}
+                </li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Peer-Reviewed Articles
+    <hr />
+    <ul>
+        {% for year in publications.articles %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.author and item.author != "Brian House" %}{{ item.author }}, {% endif %}{% if item.article %}&ldquo;{{ item.article }},&rdquo; in {% endif %}<b>{{ item.book }}</b>{% if item.volume %} ({{ item.volume }}){% endif %}{% if item.editors %}, eds. {{ item.editors }}{% endif %}{% if item.editor %}, ed. {{ item.editor }}{% endif %}{% if item.publisher %}, {{ item.publisher }}{% endif %}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Book Chapters
+    <hr />
+    <ul>
+        {% for year in publications.chapters %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.author and item.author != "Brian House" %}{{ item.author }}, {% endif %}{% if item.article %}&ldquo;{{ item.article }},&rdquo; in {% endif %}<b>{{ item.book }}</b>{% if item.volume %} ({{ item.volume }}){% endif %}{% if item.editors %}, eds. {{ item.editors }}{% endif %}{% if item.editor %}, ed. {{ item.editor }}{% endif %}{% if item.publisher %}, {{ item.publisher }}{% endif %}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Essays
+    <hr />
+    <ul>
+        {% for year in publications.essays %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.author and item.author != "Brian House" %}{{ item.author }}, {% endif %}{% if item.article %}&ldquo;{{ item.article }},&rdquo; in {% endif %}<b>{{ item.book }}</b>{% if item.volume %} ({{ item.volume }}){% endif %}{% if item.editors %}, eds. {{ item.editors }}{% endif %}{% if item.editor %}, ed. {{ item.editor }}{% endif %}{% if item.publisher %}, {{ item.publisher }}{% endif %}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Conference Papers
+    <hr />
+    <ul>
+        {% for year in publications.conferences %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.author and item.author != "Brian House" %}{{ item.author }}, {% endif %}&ldquo;{{ item.paper }},&rdquo; <b>{{ item.conference }}</b>, {{ item.location }}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Invited Talks
+    <hr />
+    <ul>
+        {% for year in talks %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.title[0].isupper() %}&ldquo;{% endif %}{{ item.title }},{% if item.title[0].isupper() %}&rdquo;{% endif %} <b>{{ item.venue }}</b>, {{ item.location }}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Bibliography—Chapters and Journals
+    <hr />
+    <ul>
+        {% for year in bibliography.critical %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {{ item.author }}, {% if item.article %}&ldquo;{{ item.article }},&rdquo; in {% endif %}<b>{{ item.book }}</b>{% if item.volume %} ({{ item.volume }}){% endif %}{% if item.editors %}, eds. {{ item.editors }}{% endif %}{% if item.editor %}, ed. {{ item.editor }}{% endif %}{% if item.publisher %}, {{ item.publisher }}{% endif %}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Bibliography-Print Periodicals
+    <hr />
+    <ul>
+        {% for year in bibliography.print %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <!-- <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> <b>{{ item.publication }}</b>, {% if item.title %}&ldquo;{{ item.title }},&rdquo;{% endif %} {{ item.issue }} </li> -->
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.author %}{{ item.author }}, {% endif %}{% if item.title %}&ldquo;{{ item.title }},&rdquo;{% endif %} <b>{{ item.publication }}</b>, {{ item.issue }}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+<div>
+    Bibliography—TV and Radio
+    <hr />
+    <ul>
+        {% for year in bibliography.tv %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> <i>{{ item.project }}</i> on <b>{{ item.channel }}</b>, {{ item.date }}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+
+<div>
+    Bibliography—Online
+    <hr />
+    <ul>
+        {% for year in bibliography.online %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <!-- <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> <b>{{ item.publication }}</b>, {% if item.title %}&ldquo;{{ item.title }},&rdquo;{% endif %} {{ item.issue }} </li> -->
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.author %}{{ item.author }}, {% endif %}{% if item.title %}&ldquo;{{ item.title }},&rdquo;{% endif %} <b>{{ item.publication }}</b>, {{ item.issue }}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>
+
+
+<!-- <div>
+    Teaching Experience
+    <hr />
+    <ul>
+        {% for year in teaching %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {{ item.course }}, <b>{{ item.institution }}</b>, {{ item.program }}, {{ item.level }}</li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div> -->
+
+<!-- <div>
+    Advising
+    <hr />
+    <ul>
+        <li><span class="show">2019</span> Rachel Balma, <b>School of Visual Arts</b>, MFA Interaction Design</li>
+        <li><span class="show">2015</span> Edek Sher, <b>RISD</b>, MFA Digital+Media</li>
+        <li><span>2015</span> Hyemi Song, <b>RISD</b>, MFA Digital+Media</li>
+        <li><span class="show">2013</span> José Fernandez Liermann, <b>RISD</b>, MFA Digital+Media</li>
+    </ul>
+</div>   -->
+
+<!-- <div>
+    Service
+    <hr />
+    <ul>
+        {% for year in service %}
+            {% for year, items in year.items() %}
+                {% for item in items %}
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {{ item.role }}, <b>{{ item.institution }}</b></li>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div>   -->
+
+
+{% endblock content %}

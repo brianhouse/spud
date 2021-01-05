@@ -1,0 +1,19 @@
+{% extends "spud/templates/page.html" %}
+
+{% block head %}
+    <style type="text/css">
+        .emp:before {
+            content: attr(t) "." attr(d) "\0040" attr(h);
+            unicode-bidi: bidi-override;
+            direction: rtl;
+        }
+    </style>
+{% endblock head %}
+
+{% block content %}
+
+<div class="about">
+    {{ text }}
+</div>
+
+{% endblock content %}

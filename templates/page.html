@@ -1,0 +1,61 @@
+<!doctype html>
+<html prefix="og: http://ogp.me/ns#" lang="en">
+<head>
+    {% block title %}<title>Brian House{% if title %} | {{ title }}{% elif page and page != 'www' %} | {{ page | title }}{% endif %}</title>{% endblock title %}
+    <meta charset="utf-8"/>
+    <meta name="robots" content="index,follow">
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="Brian House" />
+    <meta name="copyright" content="Brian House" />
+    <meta name="description" content="{% if text %}{{ text | strip_html | strip_quotes | replace('\n', ' ') | strslice(157) }}...{% else %}Brian House is an artist who investigates the politics of time in human and nonhuman systems.{% endif %}" />
+    <meta property="og:title" content="Brian House{% if title %} | {{ title }}{% elif page and page != 'www' %} | {{ page | title }}{% endif %}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://brianhouse.net{% if title %}/works/{{ page }}/{{ page }}{% else %}/about/about{% endif %}.jpg" />
+    <meta property="og:image:height" content="450">
+    <meta property="og:image:width" content="800">
+    <meta property="og:description" content="{% if text %}{{ text | strip_html | strip_quotes | replace('\n', ' ') | strslice(157) }}...{% else %}Brian House is an artist who investigates the politics of time in human and nonhuman systems.{% endif %}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@h0use" />
+    <meta name="twitter:creator" content="@h0use" />
+    <meta name="twitter:title" content="Brian House{% if title %} | {{ title }}{% elif page and page != 'www' %} | {{ page | title }}{% endif %}" />
+    <meta name="twitter:description" content="{% if text %}{{ text | strip_html | strip_quotes | replace('\n', ' ') | strslice(157) }}...{% else %}Brian House is an artist who investigates the politics of time in human and nonhuman systems.{% endif %}" />
+    <meta name="twitter:image" content="https://brianhouse.net{% if title %}/works/{{ page }}/{{ page }}{% else %}/about/about{% endif %}.jpg" />
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ absolute }}/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ absolute }}/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ absolute }}/favicon-16x16.png">
+    <link rel="manifest" href="{{ absolute }}/site.webmanifest">
+    <link rel="mask-icon" href="{{ absolute }}/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="stylesheet" type="text/css" href="{{ absolute }}/style.css" />
+{% block head %}
+{% endblock head %}
+</head>
+<body>
+
+{% block menu %}
+<div id="header">
+    <div id="name"><a href="{{ absolute }}/" alt="Works">Brian House</a></div>
+    <div id="menu">
+        <a href="{{ absolute }}/" alt="Works">Works</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ absolute }}/writings/" alt="Wrtitings">Writings</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a href="{{ absolute }}/about/" alt="About">About</a>
+    </div>
+</div>
+<div class="clear"></div>
+{% endblock menu %}
+
+<main role="main">
+
+{% block grid %}
+{% endblock grid %}
+
+<div id="content">
+{% block content %}
+{% endblock content %}
+</div>
+
+</main>
+
+</body>
+</html>

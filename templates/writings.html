@@ -1,0 +1,15 @@
+{% extends "spud/templates/page.html" %}
+
+
+{% block content %}
+{% for writing in writings %}
+    <div>
+    	<span class="title">{% if writing.link %}<a href="{{ writing.link }}" target="_blank">{% endif %}{{ writing.title }}{% if writing.link %}</a>{% endif %}</span><br />
+		<span class="credits">{{ writing.book }}{% if writing.volume %} ({{ writing.volume }}){% endif %}{% if writing.year %}, {{ writing.year }}{% endif %}
+			<!-- <br />{% if writing.editors %}, eds. {{ writing.editors }}{% endif %}{% if writing.editor %}, ed. {{ writing.editor }}{% endif %}<br /> -->
+		</span>
+        <br />
+        <!-- {% if writing.abstract %}<p class="text">{{ writing.abstract }}</p>{% endif %} -->
+    </div>
+{% endfor %}
+{% endblock content %}

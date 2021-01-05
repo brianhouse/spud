@@ -1,0 +1,101 @@
+{% extends "spud/templates/page.html" %}
+
+{% set num_media = (images|length - 1) %}
+{%- set first_image = 0 -%}
+{%- if video or youtube -%}
+    {%- set num_media = num_media + 1 -%}
+    {%- set first_image = 1 -%}
+{%- endif -%}
+
+{% block head %}
+{%- if aspect -%}
+<style type="text/css">
+    .embed-container {
+        position: relative;
+        padding-bottom: {{ aspect * 100.0 }}%;
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        margin: 0;
+        background-color: white;
+    }
+    .embed-container iframe, .embed-container object, .embed-container embed {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+    }
+</style>
+{%- endif -%}
+<script type="text/javascript">
+var num_media = {{ num_media }};
+</script>
+<script type="text/javascript" src="/display_media.js"></script>
+{% endblock head %}
+
+{% block content %}
+<div id="media">
+    <div id="media_object">
+        {% if video and aspect %}
+            <div id="media_0" class="embed-container"><iframe onload="document.getElementById('media_object').style.opacity='1'" src="https://player.vimeo.com/video/{{ video }}?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
+        {% endif %}
+        {% if youtube and aspect %}
+            <div id="media_0" class="embed-container"><iframe onload="document.getElementById('media_object').style.opacity='1'" src="https://www.youtube.com/embed/ueeQ7T0thwc" frameborder="0" allowfullscreen></iframe></div>
+        {% endif %}
+        {% for image in images %}
+            {% if not loop.first %}
+                {% if not video and not youtube and loop.index0 == 1 %}
+                <div class="embed-container" id="media_{{ loop.index0 - 1 + first_image }}">
+                    <img onload="document.getElementById('media_object').style.opacity='1'" style="display: block;" src="{{ image[0] }}" alt="Brian House - {{ title }} - {{ loop.index0 }}" onClick="displayMedia('{{ (loop.index0 - 1 + first_image + 1) % num_media }}'); return false;" {% if image[3] %}srcset="{{ image[0] }} 1x, {{ image[3] }} 2x"{% endif %} />
+                </div>
+                {% else %}
+                <img id="media_{{ loop.index0 - 1 + first_image }}" src="{{ image[0] }}" alt="Brian House - {{ title }} - {{ loop.index0 }}" onClick="displayMedia('{{ (loop.index0 - 1 + first_image + 1) % num_media }}'); return false;" {% if image[3] %}srcset="{{ image[0] }} 1x, {{ image[3] }} 2x"{% endif %} />
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% if num_media > 1 %}
+    <div id="media_thumbs">
+    </div>
+    {% endif %}
+</div>
+<div class="clear"></div>
+
+{% if audio %}
+    {% if audio | is_list %}
+        {% set tracks = audio %}
+    {% else %}
+        {% set tracks = [audio] %}
+    {% endif %}
+    {% for track in tracks %}
+    <div id="audio">
+        <iframe frameborder="0" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ track }}&amp;color=000000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;inverse=false&amp;font=Helvetica"></iframe>
+    </div>
+    {% endfor %}
+{% endif %}
+
+
+<div class="info">
+    <span class="title">{{ title }} ({{ year }})</span><br />
+    {% if date %}{{ date }}, {% endif %}{% if location %}{{ location }}<br />{% endif %}
+    {% if collaborators %}w/ {{ collaborators }}<br />{% endif %}
+</div>
+
+<div id="text" class="text">
+    {{ text }}
+</div>
+
+{% if credits %}
+<div class="credits">
+{% for credit in credits %}
+    {% for key, value in credit.items() %}
+        {{ key }}:
+        {% for person in value %}{{ person }}{%- if not loop.last -%},&nbsp;{%- else -%}.{%- endif %}{% endfor %}
+    {% endfor %}
+{% endfor %}
+ </div>
+{% endif %}
+
+{% endblock content %}
