@@ -170,7 +170,8 @@ def copy_static(root):
             shutil.copy(os.path.join("spud", "static", "js", filename), f"{root}/")
     for filename in os.listdir("icons"):
         if filename[0] != "." and not os.path.isdir(os.path.join("static", filename)):
-            shutil.copy(os.path.join("icons", filename), f"{root}/")
+            shutil.copy(os.path.join("icons", filename), f"{root}/")    
+    shutil.copy("style.css", f"{root}/")
 
 if __name__ == "__main__":
     if not len(sys.argv) > 1:

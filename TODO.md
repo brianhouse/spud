@@ -8,6 +8,7 @@ To be generalizeable beyond me, needs configuration for:
 - social media sites
 - cv should be fully yamlized
 - homepage
+- if files and folders dont exist, it shouldnt fail
 
 
 ### notes
