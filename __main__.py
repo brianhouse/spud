@@ -180,7 +180,10 @@ if __name__ == "__main__":
         structure = yaml.safe_load(f)
     root = list(structure.keys())[0]
     if sys.argv[1] == "test":
-        subprocess.check_call(f"python3 -m http.server --directory {root}/ 8000", shell=True)
+        try:
+            subprocess.check_call(f"python3 -m http.server --directory {root}/ 8000", shell=True)
+        except:
+            pass
         exit()
     elif sys.argv[1] == "rebuild":
         rebuild = True
