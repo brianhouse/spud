@@ -10,7 +10,7 @@
     <meta name="description" content="{% if text %}{{ text | strip_html | strip_quotes | replace('\n', ' ') | strslice(157) }}...{% else %}{{ info.blurb }}{% endif %}" />
     <meta property="og:title" content="{{ info.name }}{% if title %} | {{ title }}{% elif page and page != 'www' %} | {{ page | title }}{% endif %}" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="{{ info.url }}{% if title %}/works/{{ page }}/{{ page }}{% else %}/about/about{% endif %}.jpg" />
+    <meta property="og:image" content="{{ info.url }}{% if title %}/works/{{ page | slugify }}/{{ page | slugify }}{% else %}/about/about{% endif %}.jpg" />
     <meta property="og:image:height" content="450">
     <meta property="og:image:width" content="800">
     <meta property="og:description" content="{% if text %}{{ text | strip_html | strip_quotes | replace('\n', ' ') | strslice(157) }}...{% else %}{{ info.blurb }}{% endif %}" />
@@ -19,7 +19,7 @@
     <meta name="twitter:creator" content="{{ info.twitter }}" />
     <meta name="twitter:title" content="{{ info.name }}{% if title %} | {{ title }}{% elif page and page != 'www' %} | {{ page | title }}{% endif %}" />
     <meta name="twitter:description" content="{% if text %}{{ text | strip_html | strip_quotes | replace('\n', ' ') | strslice(157) }}...{% else %}{{ info.blurb }}{% endif %}" />
-    <meta name="twitter:image" content="{{ info.url }}{% if title %}/works/{{ page }}/{{ page }}{% else %}/about/about{% endif %}.jpg" />
+    <meta name="twitter:image" content="{{ info.url }}{% if title %}/works/{{ page | slugify }}/{{ page | slugify }}{% else %}/about/about{% endif %}.jpg" />
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
