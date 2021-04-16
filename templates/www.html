@@ -8,7 +8,7 @@
     {% if not ('hidden' in data and data['hidden'] == True) %}
         {% set title = work | unslugify %}
         {% set work = work | slugify %}
-        <div class="work" id="work_{{ work }}">
+        <div class="work" id="work_{{ work }}" {% if loop.index % 3 == 0 %}style="padding-right: 0px;"{% endif %}>
             <a href="/works/{{ work }}/" alt="{{ title }}">
                 <div class="image">
                 {% if image_structure[work][0][1] %}
