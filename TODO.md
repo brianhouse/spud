@@ -1,5 +1,6 @@
 ### todo
 
+- need canonical highest-res images for all projects and auto-conversion into WebP format 
 
 ### features
 
