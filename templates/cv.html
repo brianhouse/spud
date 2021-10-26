@@ -52,14 +52,14 @@
 </div>
 
 <div>
-    Solo and Duo Exhibitions
+    Solo Exhibitions
     <hr />
     <ul>
         {% for year in exhibitions.solo %}
             {% for year, items in year.items() %}
                 {% for item in items %}
                 <li>
-                    <span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.title %}<i>{{ item.title }}</i>, {% endif %}<b>{{ item.venue }}</b>, {{ item.city }}{% if item.country %}, {{ item.country }}{% endif %}
+                    <span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.title %}<i>{{ item.title }}</i>, {% endif %}<b>{{ item.venue }}</b>, {{ item.city }}{% if item.country %}, {{ item.country }}{% endif %}{% if item.collaboration %} (w/ {{ item.collaboration }}){% endif %}
                 </li>
                 {% endfor %}
             {% endfor %}
@@ -75,7 +75,7 @@
             {% for year, items in year.items() %}
                 {% for item in items %}
                 <li>
-                    <span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.title %}<i>{{ item.title }}</i>, {% endif %}<b>{{ item.venue }}</b>, {{ item.city }}{% if item.country %}, {{ item.country }}{% endif %}
+                    <span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {% if item.title %}<i>{{ item.title }}</i>, {% endif %}<b>{{ item.venue }}</b>, {{ item.city }}{% if item.country %}, {{ item.country }}{% endif %}{% if item.collaboration %} (w/ {{ item.collaboration }}){% endif %}
                 </li>
                 {% endfor %}
             {% endfor %}
