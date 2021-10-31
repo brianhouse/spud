@@ -7,6 +7,21 @@
     {%- set first_image = 1 -%}
 {%- endif -%}
 
+{%- block meta -%}
+    <meta property="og:title" content="{{ info.name }}{% if title %} | {{ title }}{% endif %}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="{{ info.url }}{% if title %}/works/{{ page | slugify }}/{{ page | slugify }}{% else %}/about/about{% endif %}.jpg" />
+    <meta property="og:image:height" content="450">
+    <meta property="og:image:width" content="800">
+    <meta property="og:description" content="{% if text %}{{ text | strip_html | strip_quotes | replace('\n', ' ') | strslice(157) }}...{% else %}{{ info.blurb }}{% endif %}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="{{ info.twitter }}" />
+    <meta name="twitter:creator" content="{{ info.twitter }}" />
+    <meta name="twitter:title" content="{{ info.name }}{% if title %} | {{ title }}{% elif page and page != 'www' %} | {{ page | title }}{% endif %}" />
+    <meta name="twitter:description" content="{% if text %}{{ text | strip_html | strip_quotes | replace('\n', ' ') | strslice(157) }}...{% else %}{{ info.blurb }}{% endif %}" />
+    <meta name="twitter:image" content="{{ info.url }}{% if title %}/works/{{ page | slugify }}/{{ page | slugify }}{% else %}/about/about{% endif %}.jpg" />
+{%- endblock meta -%}
+
 {% block head %}
 {%- if aspect -%}
 <style type="text/css">
@@ -48,10 +63,10 @@ var num_media = {{ num_media }};
             {% if not loop.first %}
                 {% if not video and not youtube and loop.index0 == 1 %}
                 <div class="embed-container" id="media_{{ loop.index0 - 1 + first_image }}">
-                    <img onload="document.getElementById('media_object').style.opacity='1'" style="display: block;" src="{{ image[0] }}" alt="Brian House - {{ title }} - {{ loop.index0 }}" onClick="displayMedia('{{ (loop.index0 - 1 + first_image + 1) % num_media }}'); return false;" {% if image[3] %}srcset="{{ image[0] }} 1x, {{ image[3] }} 2x"{% endif %} />
+                    <img onload="document.getElementById('media_object').style.opacity='1'" style="display: block;" src="{{ image[0] }}" alt="Brian House - {{ title }} - {{ loop.index0 }}" onClick="displayMedia('{{ (loop.index0 - 1 + first_image + 1) % num_media }}'); return false;" {% if image[1] %}srcset="{{ image[0] }} 1x, {{ image[1] }} 2x"{% endif %} />
                 </div>
                 {% else %}
-                <img id="media_{{ loop.index0 - 1 + first_image }}" src="{{ image[0] }}" alt="Brian House - {{ title }} - {{ loop.index0 }}" onClick="displayMedia('{{ (loop.index0 - 1 + first_image + 1) % num_media }}'); return false;" {% if image[3] %}srcset="{{ image[0] }} 1x, {{ image[3] }} 2x"{% endif %} />
+                <img id="media_{{ loop.index0 - 1 + first_image }}" src="{{ image[0] }}" alt="Brian House - {{ title }} - {{ loop.index0 }}" onClick="displayMedia('{{ (loop.index0 - 1 + first_image + 1) % num_media }}'); return false;" {% if image[1] %}srcset="{{ image[0] }} 1x, {{ image[1] }} 2x"{% endif %} />
                 {% endif %}
             {% endif %}
         {% endfor %}

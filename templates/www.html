@@ -3,24 +3,26 @@
 
 {% block grid %}
 <div id="grid">
-{% for work in structure['works'] %}
-    {% set data = child_data['works']['child_data'][work] %}
+{% for work in structure['sections']['works']['children'] %}
+    {%- set data = work['content'] -%}
+    {%- set images = work['images'] -%}
+    {%- set slug = work['page'] -%}
+    {%- set title = data['title'] -%}
     {% if not ('hidden' in data and data['hidden'] == True) %}
-        {% set title = work | unslugify %}
-        {% set work = work | slugify %}
-        <div class="work" id="work_{{ work }}" {% if loop.index % 3 == 0 %}style="padding-right: 0px;"{% endif %}>
-            <a href="/works/{{ work }}/" alt="{{ title }}">
+        <div class="work" id="work_{{ slug }}" {% if loop.index % 3 == 0 %}style="padding-right: 0px;"{% endif %}>
+            <a href="/works/{{ slug }}/" alt="{{ title }}">
                 <div class="image">
-                {% if image_structure[work][0][1] %}
-                    <img src="/works/{{ work }}/{{ work }}.jpg" alt="Brian House - {{ title }}" srcset="/works/{{ work }}/{{ work }}.jpg 1x, /works/{{ work }}/{{ work }}@2x.jpg 2x" onload="document.getElementById('work_{{ work }}').style.opacity='1'; console.log('loaded {{work}}');" />
+                {% if images[0][1] %}
+                    <img src="/works/{{ slug }}/{{ slug }}.jpg" alt="Brian House - {{ title }}" srcset="/works/{{ slug }}/{{ slug }}.jpg 1x, /works/{{ slug }}/{{ slug }}@2x.jpg 2x" onload="document.getElementById('work_{{ slug }}').style.opacity='1'; console.log('loaded {{slug}}');" />
                 {% else %}
-                    <img src="/works/{{ work }}/{{ work }}.jpg" alt="Brian House - {{ title }}" onload="document.getElementById('work_{{ work }}').style.opacity='1'" />
+                    <img src="/works/{{ slug }}/{{ slug }}.jpg" alt="Brian House - {{ title }}" onload="document.getElementById('work_{{ slug }}').style.opacity='1'" />
                 {% endif %}
                 </div>
                 <span class="grid_title">{{ title }}</span>
             </a>
         </div>
     {% endif %}
+
 {% endfor %}
 </div>
 {% endblock grid %}
