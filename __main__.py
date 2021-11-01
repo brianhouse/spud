@@ -74,7 +74,6 @@ def build():
         if section['children'] is not None:
             for child in section['children']:
                 child_name = child['page']
-                print(section_name, child_name)
                 directory = os.path.join("www", section_name, child_name)
                 if not os.path.isdir(directory):
                     os.mkdir(directory)
@@ -170,6 +169,11 @@ def copy_static():
     for filename in os.listdir("icons"):
         if filename[0] != "." and not os.path.isdir(os.path.join("static", filename)):
             shutil.copy(os.path.join("icons", filename), "www")
+    for filename in os.listdir("files"):
+        if filename[0] != "." and not os.path.isdir(os.path.join("static", filename)):
+            if not os.path.isdir(os.path.join("www", "files")):
+                os.mkdir(os.path.join("www", "files"))
+            shutil.copy(os.path.join("files", filename), os.path.join("www", "files"))
     shutil.copy(os.path.join("spud", "style.css"), "www")
 
 if __name__ == "__main__":

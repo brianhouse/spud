@@ -4,7 +4,7 @@
 <div id="header">
     <div id="name"><a href="/holyoke">{{ info.name }}</a></div>
     <div id="menu">
-        <a href="/holyoke">Mount Holoyoke</a>
+        <a href="/holyoke">Mount Holyoke</a>
     </div>
 </div>
 <div class="clear"></div>
@@ -79,8 +79,9 @@
 {% if writing.title == slug %}
 <br />
     <div style="margin-bottom: 10px;">
-    	<span class="writing_title">{% if writing.link %}<a href="{{ writing.link }}" target="_blank">{% endif %}{{ writing.title }}{% if writing.link %}</a>{% endif %}</span><br />
-		<span class="credits">{{ writing.book }}{% if writing.volume %} ({{ writing.volume }}){% endif %}{% if writing.year %}, {{ writing.year }}{% endif %}
+    	<span class="writing_title">{{ writing.title }}</span><br />
+		<span class="credits">{{ writing.volume | capitalize }}, <i>{{ writing.book }}</i>{% if writing.year %}, {{ writing.year }}{% endif %}
+        ({% if writing.link %}<u><a href="{{ writing.link }}" target="_blank">publisher</a></u>{% endif %}{% if writing.pdf %}, <u><a href="/files/{{ writing.pdf }}">pdf</a></u>{% endif %})
 		</span>
         <br />
     </div>
