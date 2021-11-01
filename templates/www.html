@@ -9,7 +9,7 @@
     {%- set slug = work['page'] -%}
     {%- set title = data['title'] -%}
     {% if not ('hidden' in data and data['hidden'] == True) %}
-        <div class="work" id="work_{{ slug }}" {% if loop.index % 3 == 0 %}style="padding-right: 0px;"{% endif %}>
+        <div class="work" id="work_{{ slug }}"{% if loop.index % 3 == 0 %} style="padding-right: 0px;"{% endif %}>
             <a href="/works/{{ slug }}/" alt="{{ title }}">
                 <div class="image">
                 {% if images[0][1] %}

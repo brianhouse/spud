@@ -1,0 +1,118 @@
+{% extends "spud/templates/page.html" %}
+
+{% block menu %}
+<div id="header">
+    <div id="name"><a href="/holyoke">{{ info.name }}</a></div>
+    <div id="menu">
+        <a href="/holyoke">Mount Holoyoke</a>
+    </div>
+</div>
+<div class="clear"></div>
+{% endblock menu %}
+
+{% block head %}
+<style type="text/css">
+.student-embed-container {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    margin: 0;
+    background-color: white;
+    padding-top: 20px;
+    overflow: auto;
+}
+
+.student-embed-container iframe, .student-embed-container object, .student-embed-container embed, .student-embed-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+</style>
+{% endblock head %}
+
+
+{% block grid %}
+
+<div id="grid">
+{{ structure['sections']['about']['content']['text'] }}
+<br /><br />
+<hr />
+<p><span class="title">Selected Works</span></p>
+<br />
+<br />
+
+{%- for slug in selections -%}
+{%- for work in structure['sections']['works']['children'] -%}
+{%- if slug == work['page'] -%}
+    {%- set data = work['content'] -%}
+    {%- set images = work['images'] -%}
+    {%- set slug = work['page'] -%}
+    {%- set title = data['title'] -%}
+    {% if not ('hidden' in data and data['hidden'] == True) %}
+        <div class="work" id="work_{{ slug }}"{% if loop.index % 3 == 0 %} style="padding-right: 0px;"{% endif %}>
+            <a href="/holyoke/{{ slug }}/" alt="{{ title }}">
+                <div class="image">
+                {% if images[0][1] %}
+                    <img src="/holyoke/{{ slug }}/{{ slug }}.jpg" alt="Brian House - {{ title }}" srcset="/works/{{ slug }}/{{ slug }}.jpg 1x, /works/{{ slug }}/{{ slug }}@2x.jpg 2x" onload="document.getElementById('work_{{ slug }}').style.opacity='1'; console.log('loaded {{slug}}');" />
+                {% else %}
+                    <img src="/holyoke/{{ slug }}/{{ slug }}.jpg" alt="Brian House - {{ title }}" onload="document.getElementById('work_{{ slug }}').style.opacity='1'" />
+                {% endif %}
+                </div>
+                <span class="grid_title">{{ title }}</span>
+            </a>
+        </div>
+    {% endif %}
+{%- endif -%}
+{%- endfor -%}
+{%- endfor -%}
+
+<hr />
+<p><span class="title">Selected Writing</span></p>
+<br />
+
+{%- for slug in writing_selections -%}
+{%- for writing in structure['sections']['writings']['content']['writings'] -%}
+{% if writing.title == slug %}
+<br />
+    <div style="margin-bottom: 10px;">
+    	<span class="writing_title">{% if writing.link %}<a href="{{ writing.link }}" target="_blank">{% endif %}{{ writing.title }}{% if writing.link %}</a>{% endif %}</span><br />
+		<span class="credits">{{ writing.book }}{% if writing.volume %} ({{ writing.volume }}){% endif %}{% if writing.year %}, {{ writing.year }}{% endif %}
+		</span>
+        <br />
+    </div>
+{% endif %}
+{%- endfor -%}
+{%- endfor -%}
+
+
+<br /><br /><br />
+<hr />
+<p><span class="title">Selected Student Work</span></p>
+<br /><br />
+
+{% for project in student_work %}
+<div class="project_container">
+    <div class="project">
+        <span style="bottom-top: 10px" class="writing_title">{{ project.name }}: <i>{{ project.title }}</i></span>
+        <br />
+        <div class="student-embed-container" style="padding-bottom: {{ project.aspect * 100.0 }}%">
+            {% if project.video %}
+                <iframe id="{{ loop.index }}_vid" src="https://player.vimeo.com/video/{{ project.video }}?title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            {% else %}
+                <img id="{{ loop.index }}_vid" src="{{ project.image }}" />
+            {% endif %}
+        </div>
+        <div class="text" id="{{ loop.index }}_text" style="margin-top: 10px">{{ project.text }}</div>
+    </div>
+    <br />
+</div>
+{% endfor %}
+
+
+</div>
+
+{% endblock grid %}

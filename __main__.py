@@ -74,17 +74,18 @@ def build():
         if section['children'] is not None:
             for child in section['children']:
                 child_name = child['page']
-                print(child_name)
+                print(section_name, child_name)
                 directory = os.path.join("www", section_name, child_name)
                 if not os.path.isdir(directory):
                     os.mkdir(directory)
-                template = os.path.join("spud", "templates", "%s.html" % section_name.strip('s') if section_name[-1] == "s" else child_name + ".html")
-                print("\t", template)
+                template = os.path.join("spud", "templates", child['content']['template'] + ".html" if 'template' in child['content'] else ("%s.html" % section_name.strip('s') if section_name[-1] == "s" else child_name + ".html"))
                 if os.path.isfile(template):
                     html = render(template, child['content'], images=child['images'], structure=structure, info=structure['info'], page=child_name)
                     html_path = os.path.join(directory, "index.html")
                     with open(html_path, 'w') as f:
                         f.write(html)
+                else:
+                    print(f"No template {template}")
                 for image in child['images']:
                     for res in image:
                         if res is not None:
