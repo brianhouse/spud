@@ -11,15 +11,6 @@
 </div>
 
 <div>
-    Portfolio
-    <hr />
-    <ul>
-        <li><a href="https://brianhouse.net"
-        >https://brianhouse.net</a></li>
-    </ul>
-</div>
-
-<div>
     Education
     <hr />
     <ul>
@@ -33,7 +24,7 @@
     Academic Positions
     <hr />
     <ul>
-        <li><span class="show">2021–2022</span> Research Fellow, Center for Artistic Research, <b>University of Oregon</b>, Eugene</li>
+        <li><span class="show">2021–<span style="color: white; padding: 0px;">0000</span></span> Research Fellow, Center for Artistic Research, <b>University of Oregon</b>, Eugene</li>
         <li><span class="show">2019–<span style="color: white; padding: 0px;">0000</span></span> Assistant Professor of Art and Studio Head of Digital Media, <b>Lewis &amp; Clark College</b>, Portland</li>
         <li><span class="show">2018–2019</span> Mellon Associate Research Scholar, <b>Columbia University GSAPP</b>, New York</li>
         <li><span class="show">2012–2015</span> Critic, <b>Rhode Island School of Design</b>, Providence</li>
@@ -227,7 +218,7 @@
 </div>
 
 
-<div>
+<!-- <div>
     Teaching Experience
     <hr />
     <ul>
@@ -239,7 +230,7 @@
             {% endfor %}
         {% endfor %}
     </ul>
-</div>
+</div> -->
 
 <!-- <div>
     Graduate Thesis Advising
@@ -266,5 +257,16 @@
     </ul>
 </div>   -->
 
+<!-- <div>
+    Technical Skills
+    <hr />
+    <ul>
+        {% for kind in technical %}
+            {% for key,items in kind.items() %}
+                <li>{{ key }}: {% for item in items %}{{ item }}{% if not loop.last %}, {% endif %}{% endfor %}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</div> -->
 
 {% endblock content %}
