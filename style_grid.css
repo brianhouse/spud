@@ -77,6 +77,15 @@ p {
         transition-delay: .5s;
     }
 
+    @media screen and (min-width: 840px) {
+        #grid .work {
+            width: 253px;
+            float: left;
+            padding-right: 20px;
+            margin-bottom: 20px;
+        }
+    }
+
         #grid .work .image {
             position: relative;
             width: 100%;
@@ -89,6 +98,12 @@ p {
                 position: absolute;
             }
 
+            @media screen and (min-width: 840px) {
+                #grid .work img:hover {
+                    opacity: 40%;
+                }
+            }
+
     #grid .work .grid_title {
         display: block;
         position: relative;
@@ -96,6 +111,26 @@ p {
         margin-bottom: 60px;
         font-size: 20px;
         line-height: 24px;
+    }
+
+    @media screen and (min-width: 840px) {
+        #grid .work .grid_title {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 253px;
+            height: 142px;
+            text-align: center;
+            vertical-align: center;
+            background: blue;
+
+        }
+        #grid .work span.grid_title  {
+            visibility: hidden;
+        }
+        #grid .work span.grid_title :hover {
+            visibility: visible;
+        }
     }
 
 .writing_title {
@@ -151,7 +186,6 @@ p {
     #audio iframe {
         height: 20px;
     }
-
 
 #info {
     margin-bottom: 30px;
