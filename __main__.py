@@ -72,14 +72,31 @@ def build():
 
         # subpages
         if section['children'] is not None:
-            for child in section['children']:
+            num_children = len(section['children'])
+            for c, child in enumerate(section['children']):
                 child_name = child['page']
+                i = 1
+                while True:
+                    prev = section['children'][(c-i) % num_children]
+                    if 'hidden' in prev['content'] and prev['content']['hidden'] is True:
+                        i += 1
+                    else:
+                        prev_path = "/" + section_name + "/" + prev['page']
+                        break
+                i = 1
+                while True:
+                    next = section['children'][(c+i) % num_children]
+                    if 'hidden' in next['content'] and next['content']['hidden'] is True:
+                        i += 1
+                    else:
+                        next_path = "/" + section_name + "/" + next['page']
+                        break
                 directory = os.path.join("www", section_name, child_name)
                 if not os.path.isdir(directory):
                     os.mkdir(directory)
                 template = os.path.join("spud", "templates", child['content']['template'] + ".html" if 'template' in child['content'] else ("%s.html" % section_name.strip('s') if section_name[-1] == "s" else child_name + ".html"))
                 if os.path.isfile(template):
-                    html = render(template, child['content'], images=child['images'], structure=structure, info=structure['info'], page=child_name)
+                    html = render(template, child['content'], images=child['images'], structure=structure, info=structure['info'], page=child_name, prev=prev_path, next=next_path)
                     html_path = os.path.join(directory, "index.html")
                     with open(html_path, 'w') as f:
                         f.write(html)
