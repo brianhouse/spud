@@ -151,6 +151,11 @@ p {
         height: 20px;
     }
 
+
+#info {
+    margin-bottom: 30px;
+}
+
 .clear {
     clear: both;
     margin-bottom: 0px;
@@ -159,11 +164,6 @@ p {
 .title {
     font-size: 24px;
     line-height: 34px;
-}
-
-
-.info {
-    margin-bottom: 30px;
 }
 
 img {
@@ -230,4 +230,8 @@ li span {
 
 li span.show {
     color: black;
+}
+
+.credits {
+    margin-bottom: 18px;
 }

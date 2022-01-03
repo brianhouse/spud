@@ -92,25 +92,28 @@ var num_media = {{ num_media }};
 {% endif %}
 
 
-<div class="info">
+<div id="info">
     <span class="title">{{ title }} ({{ year }})</span><br />
     {% if date %}{{ date }}, {% endif %}{% if location %}{{ location }}<br />{% endif %}
     {% if collaborators %}w/ {{ collaborators }}<br />{% endif %}
 </div>
 
-<div id="text" class="text">
+<div id="text">
     {{ text }}
+    {% if publication %}
+    <p>For more information, see “{{ publication.title }}” in <i>{{ publication.book }}</i>, {{ publication.year }} ({% if publication.link %}<u><a href="{{ publication.link }}" target="_blank">publisher</a></u>{% endif %}{% if publication.pdf %}, <u><a href="/files/{{ publication.pdf }}">pdf</a></u>{% endif %})</p>
+    {% endif %}
 </div>
 
 {% if credits %}
-<div class="credits">
+<div id="credits">
 {% for credit in credits %}
     {% for key, value in credit.items() %}
         {{ key }}:
         {% for person in value %}{{ person }}{%- if not loop.last -%},&nbsp;{%- else -%}.{%- endif %}{% endfor %}
     {% endfor %}
 {% endfor %}
- </div>
+</div>
 {% endif %}
 
 {% endblock content %}
