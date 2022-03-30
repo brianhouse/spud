@@ -1,0 +1,63 @@
+{% extends "spud/templates/page.html" %}
+
+{% block head %}
+<style type="text/css">
+.student-embed-container {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    margin: 0;
+    background-color: white;
+    padding-top: 20px;
+    overflow: auto;
+}
+
+.student-embed-container iframe, .student-embed-container object, .student-embed-container embed, .student-embed-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+</style>
+{% endblock head %}
+
+
+{% block grid %}
+
+<div id="grid">
+<hr />
+<p><span class="title">Selected Student Work</span></p>
+<br /><br />
+
+{% for project in student_work %}
+<div class="project_container">
+    <div class="project">
+        <span style="bottom-top: 10px" class="writing_title">{{ project.name }}: <i>{{ project.title }}</i></span>
+        <br />
+        <div class="student-embed-container" style="padding-bottom: {{ project.aspect * 100.0 }}%">
+            {% if project.video %}
+                <iframe id="{{ loop.index }}_vid" src="https://player.vimeo.com/video/{{ project.video }}?h={% if project.secret %}{{ project.secret }}&amp;{% endif %}title=0&amp;byline=0&amp;portrait=0&amp;color=ffffff" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+            {% elif project.audio %}
+                <div id="audio">
+                    <iframe frameborder="0" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/{{ project.audio }}&amp;color=000000&amp;auto_play=false&amp;hide_related=true&amp;show_comments=false&amp;show_user=false&amp;show_reposts=false&amp;inverse=false&amp;font=Helvetica"></iframe>
+                </div>
+            {% else %}
+                <img id="{{ loop.index }}_vid" src="{{ project.image }}" />
+            {% endif %}
+        </div>
+        <div class="text" id="{{ loop.index }}_text" style="margin-top: 10px">
+            {{ project.text }}
+            Course: {{ project.course }}
+        </div>
+    </div>
+    <br />
+</div>
+{% endfor %}
+
+
+</div>
+
+{% endblock grid %}
