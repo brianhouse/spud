@@ -24,8 +24,8 @@
     Academic Positions
     <hr />
     <ul>
-        <!-- <li><span class="show">2021–<span style="color: white; padding: 0px;">0000</span></span> Research Fellow, Center for Artistic Research, <b>University of Oregon</b>, Eugene</li> -->
-        <li><span class="show">2019–<span style="color: white; padding: 0px;">0000</span></span> Assistant Professor of Art and Studio Head of Digital Media, <b>Lewis &amp; Clark College</b>, Portland</li>
+        <li><span class="show">2023–<span style="color: white; padding: 0px;">0000</span></span> Assistant Professor of Art, <b>Amherst College</b>, Massachusetts</li>
+        <li><span class="show">2019–2022</span> Assistant Professor of Art, <b>Lewis &amp; Clark College</b>, Portland</li>
         <li><span class="show">2018–2019</span> Mellon Associate Research Scholar, <b>Columbia University GSAPP</b>, New York</li>
         <li><span class="show">2012–2015</span> Critic, <b>Rhode Island School of Design</b>, Providence</li>
     </ul>
@@ -219,19 +219,19 @@
 </div>
 
 
-<div>
+<!-- <div>
     Teaching Experience
     <hr />
     <ul>
         {% for year in teaching %}
             {% for year, items in year.items() %}
                 {% for item in items %}
-                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {{ item.course }}, <b>{{ item.institution }}</b>, {{ item.program }}<!--, {{ item.level }}--></li>
+                <li><span {% if loop.first %}class="show"{% endif %}>{{ year }}</span> {{ item.course }}, <b>{{ item.institution }}</b>, {{ item.program }}, {{ item.level }}</li>
                 {% endfor %}
             {% endfor %}
         {% endfor %}
     </ul>
-</div>
+</div> -->
 
 <!-- <div>
     Graduate Thesis Advising
