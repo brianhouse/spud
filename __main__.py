@@ -1,7 +1,4 @@
-#!/usr/bin/env python3
-
 import os, sys, yaml, markdown, shutil, jinja2, re, subprocess, time, datetime, json
-from PIL import Image
 from pprint import pprint
 
 
@@ -199,7 +196,7 @@ if __name__ == "__main__":
         exit()
     if sys.argv[1] == "test":
         try:
-            subprocess.check_call(f"python3 -m http.server --directory www/ 8000", shell=True)
+            subprocess.check_call(f"python -m http.server --directory www/ 8000", shell=True)
         except:
             pass
         exit()

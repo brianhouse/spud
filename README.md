@@ -2,7 +2,7 @@
 
 Static website generator
 
-    python3 spud
+    python spud
 
 
 ### Copyright/License
